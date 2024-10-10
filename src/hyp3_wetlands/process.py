@@ -4,38 +4,24 @@ wetlands processing
 
 import argparse
 import logging
+from datetime import datetime
 from pathlib import Path
+
+import papermill as pm
 
 from hyp3_wetlands import __version__
 
 log = logging.getLogger(__name__)
 
 
-def process_wetlands(greeting: str = 'Hello world!') -> Path:
-    """Create a greeting product
-
-    Args:
-        greeting: Write this greeting to a product file (Default: "Hello world!" )
-    """
-    log.debug(f'Greeting: {greeting}')
-    product_file = Path('greeting.txt')
-    product_file.write_text(greeting)
-    return product_file
-
-
-def main():
-    """process_wetlands entrypoint"""
-    parser = argparse.ArgumentParser(
-        prog='process_wetlands',
-        description=__doc__,
+def process_wetlands() -> Path:
+    """Run the NISAR ATBD wetlands notebook."""
+    notebook_path = Path(__file__).parent / 'etc' / 'NISAR_ATBD_wetlands.ipynb'
+    executed_notebook = Path.cwd() / f'{notebook_path.stem}_{datetime.now()}.ipynb'
+    pm.execute_notebook(
+        notebook_path,
+        executed_notebook,
+        kernel_name='python3',
     )
-    parser.add_argument('--greeting', default='Hello world!',
-                        help='Write this greeting to a product file')
-    parser.add_argument('--version', action='version', version=f'%(prog)s {__version__}')
-    args = parser.parse_args()
-
-    process_wetlands(**args.__dict__)
-
-
-if __name__ == "__main__":
-    main()
+    
+    return executed_notebook

@@ -25,6 +25,7 @@ dependencies:
   - ipympl
   - matplotlib-base
   - numpy
+  - papermill
   - rasterio
   - rioxarray
   - scipy
