@@ -1,18 +1,31 @@
 name: NISAR_EA_Workshop_2024_10
-#
 channels:
   - conda-forge
+  - nodefaults
 dependencies:
+  - python>=3.10
+  - pip
+  # For packaging, and testing
+  - ruff
+  - setuptools
+  - setuptools_scm
+  - wheel
+  - pytest
+  - pytest-console-scripts
+  - pytest-cov
+  # For running
   - asf_search
   - boto3
   - earthaccess
   - geopandas
   - h5py
+  - hyp3lib>=3,<4
   - imageio
   - ipykernel
   - ipympl
   - matplotlib-base
   - numpy
+  - papermill
   - rasterio
   - rioxarray
   - scipy
