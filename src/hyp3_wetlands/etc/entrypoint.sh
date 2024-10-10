@@ -1,4 +1,4 @@
 #!/bin/bash --login
 set -e
-conda activate wetlands_notebook
+conda activate NISAR_EA_Workshop_2024_10
 exec python -um hyp3_wetlands "$@"
